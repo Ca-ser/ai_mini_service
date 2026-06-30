@@ -27,7 +27,7 @@ public class LimClient {
     private RedisTemplate<String , Object> redisTemplate;
 
     private static final String API_URL = "https://api.deepseek.com/v1/chat/completions";
-    private static final String API_KEY = "sk-fe11706b4f2149bf859bf5b43249b8e5";
+    private static final String API_KEY = "";
 
     private static final String SYSTEM_CONTENT=
             """
