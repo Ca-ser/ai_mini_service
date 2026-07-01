@@ -23,7 +23,7 @@ import java.util.Map;
 @Slf4j
 @Service
 public class LimClient {
-
+    @Resource
     private RedisTemplate<String , Object> redisTemplate;
 
     private static final String API_URL = "https://api.deepseek.com/v1/chat/completions";
