@@ -1,5 +1,6 @@
 package com.waiitz.ai_mini_service.client;
 
+import com.waiitz.ai_mini_service.context.PromptVersion;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -8,13 +9,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,22 +24,12 @@ import java.util.Map;
 public class LimClient {
     @Resource
     private RedisTemplate<String , Object> redisTemplate;
+    @Resource
+    PromptVersion promptVersion;
 
     private static final String API_URL = "https://api.deepseek.com/v1/chat/completions";
     private static final String API_KEY = "";
 
-    private static final String SYSTEM_CONTENT=
-            """
-            你是一个资深后端架构助手,擅长
-            - Java / Spring Boot
-            - 分布式系统设计
-            - AI 应用架构
-            
-            输出要求:
-            1. 必须结构化回答
-            2. 必须分点说明
-            3. 必要时给出代码示例
-            """;
     
     public String callLLM(String userInput){
         RestTemplate restTemplate = new RestTemplate();
@@ -51,7 +40,7 @@ public class LimClient {
         HashMap<String, Object> body = new HashMap<>();
         body.put("model","deepseek-v4-flash");
         ArrayList<Map<String , String >> messages = new ArrayList<>();
-        messages.add(Map.of("role","system","content",SYSTEM_CONTENT));
+        messages.add(Map.of("role","system","content",promptVersion.getV1()));
         messages.add(Map.of("role","user","content",userInput));
         body.put("messages",messages);
 
