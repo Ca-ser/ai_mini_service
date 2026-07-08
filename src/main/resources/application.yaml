@@ -2,7 +2,7 @@ server:
   port: 10000
 spring:
   application:
-    name: ai_mini_service
+    name: suji_service
   data:
     redis:
       # 主机地址（默认 localhost）
@@ -28,6 +28,6 @@ spring:
           max-wait: -1ms
 
 openai:
-  api-key: "sk-"
+  api-key: "sk-fe11706b4f2149bf859bf5b43249b8e5"
   base-url: "https://api.deepseek.com/v1/chat/completions"
   model: "deepseek-v4-flash"

@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.WaiitZ</groupId>
-	<artifactId>ai_mini_service</artifactId>
+	<artifactId>suji_service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ai_mini_service</name>
 	<description>ai_mini_service</description>
