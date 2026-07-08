@@ -48,6 +48,16 @@ spring:
 #          # 最大等待时间（-1 表示无限制）
 #          max-wait: -1ms
 
+############## Sa-Token 配置 ##############
+sa-token:
+  token-name: Authorization
+  timeout: 2592000
+  active-timeout: -1
+  is-concurrent: true
+  is-share: true
+  token-style: uuid
+  is-log: false
+
 openai:
   api-key: "sk-fe11706b4f2149bf859bf5b43249b8e5"
   base-url: "https://api.deepseek.com/v1/chat/completions"

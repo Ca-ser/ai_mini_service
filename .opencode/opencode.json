@@ -1,9 +1,0 @@
-{
-  "skills": [
-    {
-      "name": "knowledge-base-backend",
-      "file": "skills/knowledge-base-backend.md",
-      "description": "知识库网站后端开发 — Spring Boot + PostgreSQL 模块化单体架构。基于 src/main/resources/templates/需求文档.md 定义的项目规范。"
-    }
-  ]
-}
