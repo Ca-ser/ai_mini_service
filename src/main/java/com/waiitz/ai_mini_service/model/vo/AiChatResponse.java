@@ -1,4 +1,4 @@
-package com.waiitz.ai_mini_service.model;
+package com.waiitz.ai_mini_service.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

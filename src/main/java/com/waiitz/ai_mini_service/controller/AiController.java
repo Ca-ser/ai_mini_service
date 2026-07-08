@@ -1,12 +1,9 @@
 package com.waiitz.ai_mini_service.controller;
 
 import com.waiitz.ai_mini_service.client.LimClient;
-import com.waiitz.ai_mini_service.model.AiChatResponse;
+import com.waiitz.ai_mini_service.model.vo.AiChatResponse;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/ai")
