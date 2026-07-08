@@ -3,29 +3,50 @@ server:
 spring:
   application:
     name: suji_service
-  data:
-    redis:
-      # 主机地址（默认 localhost）
-      host: 127.0.0.1
-      # 数据库索引（默认 0）
-      port: 12090
-      database: 0
-      # 密码（没有密码留空）
-      password:
-      # 连接超时时间（毫秒）
-      timeout: 60000ms
 
-      # Lettuce 连接池配置（Spring Boot 3.x 默认客户端）
-      lettuce:
-        pool:
-          # 最大连接数
-          max-active: 8
-          # 最大空闲连接
-          max-idle: 8
-          # 最小空闲连接
-          min-idle: 0
-          # 最大等待时间（-1 表示无限制）
-          max-wait: -1ms
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ai_mini_service
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 10000
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: app
+
+#  data:
+#    redis:
+#      # 主机地址（默认 localhost）
+#      host: 127.0.0.1
+#      # 数据库索引（默认 0）
+#      port: 12090
+#      database: 0
+#      # 密码（没有密码留空）
+#      password:
+#      # 连接超时时间（毫秒）
+#      timeout: 60000ms
+#
+#      # Lettuce 连接池配置（Spring Boot 3.x 默认客户端）
+#      lettuce:
+#        pool:
+#          # 最大连接数
+#          max-active: 8
+#          # 最大空闲连接
+#          max-idle: 8
+#          # 最小空闲连接
+#          min-idle: 0
+#          # 最大等待时间（-1 表示无限制）
+#          max-wait: -1ms
 
 openai:
   api-key: "sk-fe11706b4f2149bf859bf5b43249b8e5"
