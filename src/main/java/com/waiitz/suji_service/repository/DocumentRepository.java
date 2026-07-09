@@ -14,4 +14,12 @@ public interface DocumentRepository extends JpaRepository<Document, UUID> {
 
     List<Document> findByParentId(UUID parentId);
 
+    long countByKbId(UUID kbId);
+
+    long countByKbIdAndStatusNot(UUID kbId, String status);
+
+    List<Document> findByKbIdAndStatusNot(UUID kbId, String status);
+
+    List<Document> findByParentIdAndStatusNot(UUID parentId, String status);
+
 }

@@ -12,4 +12,8 @@ public interface KnowledgeBaseRepository extends JpaRepository<KnowledgeBase, UU
 
     List<KnowledgeBase> findByWorkspaceId(UUID workspaceId);
 
+    long countByWorkspaceId(UUID workspaceId);
+
+    List<KnowledgeBase> findByWorkspaceIdAndStatusNot(UUID workspaceId, String status);
+
 }

@@ -5,9 +5,9 @@ spring:
     name: suji_service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/ai_mini_service
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://101.34.79.46:5432/knowledge_base
+    username: kb_admin
+    password: your_password
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
@@ -23,6 +23,15 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         default_schema: app
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+app:
+  upload:
+    dir: ./uploads
 
 #  data:
 #    redis:

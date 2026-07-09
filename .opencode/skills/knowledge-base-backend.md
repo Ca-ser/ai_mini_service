@@ -195,3 +195,37 @@ Workspace (OWNER / ADMIN / EDITOR / VIEWER / GUEST)
 2. **Phase 2**: Collaboration (WebSocket, CRDT, presence, snapshots)
 3. **Phase 3**: AI Assistant (chunking, embedding, vector search, RAG)
 4. **Phase 4**: WeChat Publication (channel config, doc→HTML, draft creation)
+
+## Development Progress
+
+### Completed ✅ (Phase 1)
+- Auth: register + login + getCurrentUser (Sa-Token Bearer Token)
+- Workspace: CRUD + member invitation (OWNER/ADMIN/EDITOR/VIEWER/GUEST)
+- KnowledgeBase: CRUD + soft delete + cascade
+- Document: tree + CRUD + save (snapshot+version) + delete cascade + move + version list/detail/restore
+- Asset: file upload (MIME whitelist, 50MB limit, SHA-256, local storage)
+- PermissionService: Document→KB→Workspace chain with RoleEnum ordinal comparison
+- AuditLog: write operations logged to audit_logs table
+- Common: ErrorCode (11 codes), Result<T>, BizException, GlobalExceptionHandler
+
+### Pending ❌ (Phase 2-4)
+- Collaboration: WebSocket endpoint, CRDT, presence, collab snapshots
+- Search: PostgreSQL full-text search (tsvector/GIN)
+- AI: document chunking, embedding generation, pgvector retrieval, RAG QA
+- Publication: WeChat channel config, doc→HTML, draft creation
+- Job: async task framework (state machine, retry, idempotency)
+- Cache: cache_entries table usage logic
+
+## Session Memories
+
+每次开发会话结束后，必须保存一个 `dev-memory-{date}-{topic}.md` 文件到 `.opencode/skills/` 并注册到 `opencode.json`。
+
+会话记忆应包含：
+1. 本次会话新增/修改的文件清单
+2. 实现的 API 接口列表
+3. 架构决策和设计理由
+4. 代码约定变更
+5. 当前进度百分比
+6. 下一步计划建议
+
+当前会话记录：`skills/dev-memory-2026-07-09-phase1.md`
