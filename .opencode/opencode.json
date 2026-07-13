@@ -1,0 +1,11 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "skills": {
+    "paths": [".opencode/skills"]
+  },
+  "instructions": [
+    ".opencode/skills/knowledge-base-backend/SKILL.md",
+    ".opencode/skills/openapi-docs/SKILL.md",
+    ".opencode/skills/dev-memory/SKILL.md"
+  ]
+}

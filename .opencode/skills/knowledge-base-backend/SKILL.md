@@ -216,16 +216,19 @@ Workspace (OWNER / ADMIN / EDITOR / VIEWER / GUEST)
 - Job: async task framework (state machine, retry, idempotency)
 - Cache: cache_entries table usage logic
 
-## Session Memories
+## Session Memories (Auto-Record via dev-memory Skill)
 
-每次开发会话结束后，必须保存一个 `dev-memory-{date}-{topic}.md` 文件到 `.opencode/skills/` 并注册到 `opencode.json`。
+每次会话结束时，**dev-memory skill 会自动执行**以下流程：
 
-会话记忆应包含：
-1. 本次会话新增/修改的文件清单
-2. 实现的 API 接口列表
-3. 架构决策和设计理由
-4. 代码约定变更
-5. 当前进度百分比
-6. 下一步计划建议
+1. 分析本次代码变更
+2. 生成会话记忆文件到 `skills/dev-memory/dev-memory-{date}-{topic}.md`
+3. 更新本文件的 Development Progress 章节
+4. 更新 `skills/openapi-docs/SKILL.md` 的 API 状态
 
-当前会话记录：`skills/dev-memory-2026-07-09-phase1.md`
+**请勿手动编辑 dev-memory 记录文件** — 由 dev-memory skill 统一管理。
+
+### 当前会话记录
+
+| 文件 | 日期 | 主题 |
+|------|------|------|
+| `skills/dev-memory/dev-memory-2026-07-09-phase1.md` | 2026-07-09 | Phase 1 知识库闭环实现 |
