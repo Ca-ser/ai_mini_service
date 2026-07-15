@@ -42,4 +42,8 @@ public class BizException extends RuntimeException {
         return new BizException(ErrorCode.CONFLICT, message);
     }
 
+    public static BizException rateLimited(String message) {
+        return new BizException(ErrorCode.RATE_LIMITED, message);
+    }
+
 }

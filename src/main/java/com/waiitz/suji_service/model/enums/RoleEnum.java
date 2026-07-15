@@ -1,24 +1,27 @@
 package com.waiitz.suji_service.model.enums;
 
-/**
- * 系统角色枚举
- * ordinal 越小权限越高：OWNER(0) > ADMIN(1) > EDITOR(2) > VIEWER(3) > GUEST(4)
- */
+import lombok.Getter;
+
+@Getter
 public enum RoleEnum {
 
-    /** 所有者 — 拥有工作空间内所有权限 */
-    OWNER,
+    OWNER(100),
+    ADMIN(80),
+    EDITOR(60),
+    VIEWER(40),
+    GUEST(20);
 
-    /** 管理员 — 管理成员、知识库、发布渠道 */
-    ADMIN,
+    private final int level;
 
-    /** 编辑者 — 创建和编辑文档，使用 AI */
-    EDITOR,
+    RoleEnum(int level) {
+        this.level = level;
+    }
 
-    /** 阅读者 — 查看文档和使用只读 AI 问答 */
-    VIEWER,
+    public boolean canManage(RoleEnum target) {
+        return this.level > target.level;
+    }
 
-    /** 访客 — 访问被授权的部分文档 */
-    GUEST
-
+    public static RoleEnum min(RoleEnum a, RoleEnum b) {
+        return a.level <= b.level ? a : b;
+    }
 }

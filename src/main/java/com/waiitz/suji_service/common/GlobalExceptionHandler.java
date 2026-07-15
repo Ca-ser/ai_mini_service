@@ -5,6 +5,7 @@ import cn.dev33.satoken.exception.NotPermissionException;
 import cn.dev33.satoken.exception.NotRoleException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,9 +17,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BizException.class)
-    public Result<Void> handleBizException(BizException e) {
+    public ResponseEntity<Result<Void>> handleBizException(BizException e) {
         log.warn("BizException: code={}, message={}", e.getCode(), e.getMessage());
-        return Result.error(e.getCode(), e.getMessage());
+        HttpStatus status = switch (e.getCode()) {
+            case 400001 -> HttpStatus.BAD_REQUEST;
+            case 401001 -> HttpStatus.UNAUTHORIZED;
+            case 403001 -> HttpStatus.FORBIDDEN;
+            case 404001 -> HttpStatus.NOT_FOUND;
+            case 409001 -> HttpStatus.CONFLICT;
+            case 429001 -> HttpStatus.TOO_MANY_REQUESTS;
+            default -> HttpStatus.INTERNAL_SERVER_ERROR;
+        };
+        return new ResponseEntity<>(Result.error(e.getCode(), e.getMessage()), status);
     }
 
     @ExceptionHandler(NotLoginException.class)

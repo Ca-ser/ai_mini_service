@@ -146,10 +146,25 @@ public class WorkspaceService {
         }
 
         // 校验角色合法性
+        RoleEnum targetRole;
         try {
-            RoleEnum.valueOf(request.getRole());
+            targetRole = RoleEnum.valueOf(request.getRole());
         } catch (IllegalArgumentException e) {
             throw BizException.badRequest("无效的角色类型：" + request.getRole());
+        }
+
+        // 禁止通过邀请授予 OWNER 角色
+        if (targetRole == RoleEnum.OWNER) {
+            throw BizException.forbidden("不能通过邀请授予 OWNER 角色");
+        }
+
+        // 获取操作者角色，限制可授予的角色上限
+        RoleEnum actorRole = permissionService.getWorkspaceRole(actorUserId, workspaceId);
+        if (actorRole == RoleEnum.ADMIN) {
+            // ADMIN 只能授予 EDITOR、VIEWER、GUEST
+            if (targetRole.getLevel() > RoleEnum.EDITOR.getLevel()) {
+                throw BizException.forbidden("ADMIN 不能授予 " + targetRole + " 角色");
+            }
         }
 
         // 添加成员

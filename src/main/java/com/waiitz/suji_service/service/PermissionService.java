@@ -18,8 +18,8 @@ import java.util.UUID;
  * 权限校验服务
  *
  * 权限链：Document → KnowledgeBase → Workspace → workspace_members.role
- * 通过 RoleEnum.ordinal() 比较角色级别（OWNER=0 最高，GUEST=4 最低）
- * 用户角色 ordinal <= 所需角色 ordinal 即放行
+ * 通过 RoleEnum.level 比较角色级别（OWNER=100 最高，GUEST=20 最低）
+ * 用户角色 level >= 所需角色 level 即放行
  */
 @Service
 public class PermissionService {
@@ -66,7 +66,7 @@ public class PermissionService {
 
         RoleEnum userRole = RoleEnum.valueOf(member.getRole());
         for (RoleEnum required : requiredRoles) {
-            if (userRole.ordinal() <= required.ordinal()) {
+            if (userRole.getLevel() >= required.getLevel()) {
                 return;
             }
         }

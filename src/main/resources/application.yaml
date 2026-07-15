@@ -68,6 +68,6 @@ sa-token:
   is-log: false
 
 openai:
-  api-key: "sk-fe11706b4f2149bf859bf5b43249b8e5"
+  api-key: "your are api_key"
   base-url: "https://api.deepseek.com/v1/chat/completions"
   model: "deepseek-v4-flash"
