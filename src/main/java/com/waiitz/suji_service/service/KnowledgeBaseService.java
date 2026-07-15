@@ -111,7 +111,7 @@ public class KnowledgeBaseService {
         // 校验用户有 EDITOR 及以上权限
         permissionService.checkKnowledgeBaseAccess(kbId, RoleEnum.EDITOR, RoleEnum.ADMIN, RoleEnum.OWNER);
 
-        KnowledgeBase kb = knowledgeBaseRepository.findById(kbId)
+        KnowledgeBase kb = knowledgeBaseRepository.findActiveById(kbId)
                 .orElseThrow(() -> BizException.notFound("知识库不存在"));
 
         kb.setName(request.getName());
@@ -142,7 +142,7 @@ public class KnowledgeBaseService {
         // 校验用户有 ADMIN 及以上权限（仅管理员及以上可删除）
         permissionService.checkKnowledgeBaseAccess(kbId, RoleEnum.ADMIN, RoleEnum.OWNER);
 
-        KnowledgeBase kb = knowledgeBaseRepository.findById(kbId)
+        KnowledgeBase kb = knowledgeBaseRepository.findActiveById(kbId)
                 .orElseThrow(() -> BizException.notFound("知识库不存在"));
 
         // 软删除知识库
