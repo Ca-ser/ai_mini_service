@@ -20,11 +20,11 @@ import java.util.*;
 @Service
 public class LimClient {
 
-    @Value("${openai.base-url}")
+    @Value("${llm.base-url}")
     private String API_URL;
-    @Value("${openai.api-key}")
+    @Value("${llm.api-key}")
     private String API_KEY;
-    @Value("${openai.model}")
+    @Value("${llm.model}")
     private String MODEL;
 
     private final ObjectMapper objectMapper = new ObjectMapper();

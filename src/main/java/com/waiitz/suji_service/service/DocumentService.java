@@ -203,13 +203,14 @@ public class DocumentService {
         Document document = documentRepository.findActiveById(documentId)
                 .orElseThrow(() -> BizException.notFound("文档不存在"));
 
+        UUID workspaceId = permissionService.getDocumentWorkspaceId(documentId);
+
         document.setStatus(DocumentStatus.DELETED.name());
         document.setUpdatedAt(OffsetDateTime.now());
         documentRepository.save(document);
 
         cascadeDeleteChildren(documentId);
 
-        UUID workspaceId = permissionService.getDocumentWorkspaceId(documentId);
         writeAuditLog(userId, workspaceId, "DELETE_DOCUMENT", "DOCUMENT", documentId);
     }
 
